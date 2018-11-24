@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Tmpps.Infrastructure.Common.DependencyInjection.Builder.Interfaces;
+using Tmpps.Infrastructure.Data;
+using Tmpps.Infrastructure.Data.Interfaces;
 using Tmpps.Infrastructure.Data.Migration.Interfaces;
 
 namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
@@ -24,6 +26,8 @@ namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
             builder.RegisterType<MigrationDbContextWrapper>(x => x.As<IMigrationDbContext>());
             builder.RegisterType<MigrationRepository>(x => x.As<IMigrationRepository<MigrationHistory>>());
             builder.RegisterType<MigrationHelper>(x => x.As<IMigrationHelper>());
+            builder.RegisterType<MigrationHelper>(x => x.As<IMigrationHelper>());
+            builder.RegisterType<DbQueryCache>(x => x.As<IDbQueryCache>());
         }
     }
 }
