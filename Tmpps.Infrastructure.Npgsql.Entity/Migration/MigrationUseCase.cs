@@ -12,7 +12,7 @@ using Tmpps.Infrastructure.Data.Migration.Interfaces;
 
 namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
 {
-    internal class MigrationUseCase : IMigrationUseCase
+    public class MigrationUseCase : IMigrationUseCase
     {
         private IMigrationConfig config;
         private IPathResolver pathResolver;
@@ -35,7 +35,7 @@ namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
             {
                 throw new BizLogicException($"指定のディレクトリーは存在しません。(path:{this.config.Path})");
             }
-            var databases = Directory.GetDirectories(dir).Where(x => string.IsNullOrEmpty(this.config.Database) || this.config.Database == Path.GetDirectoryName(x));
+            var databases = Directory.GetDirectories(dir).Select(Path.GetDirectoryName).Where(x => string.IsNullOrEmpty(this.config.Database) || this.config.Database == x);
             foreach (var database in databases)
             {
                 var files = Directory.GetFiles(Path.Combine(dir, database), "*.sql", SearchOption.AllDirectories)
