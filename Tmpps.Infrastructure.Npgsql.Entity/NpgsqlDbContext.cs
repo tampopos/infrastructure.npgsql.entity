@@ -17,15 +17,8 @@ namespace Tmpps.Infrastructure.Npgsql.Entity
 {
     public abstract class NpgsqlDbContext : DbContext
     {
-        private IDbQueryCache queryPool;
-
         public NpgsqlDbContext(DbContextOptions options) : base(options) { }
         public NpgsqlDbContext(DbContextOptions<NpgsqlDbContext> options) : this(options as DbContextOptions) { }
-        public NpgsqlDbContext(DbContextOptions options, IDbQueryCache queryPool) : this(options)
-        {
-            this.queryPool = queryPool;
-        }
-        public NpgsqlDbContext(DbContextOptions<NpgsqlDbContext> options, IDbQueryCache queryPool) : this(options as DbContextOptions, queryPool) { }
 
         public override int SaveChanges()
         {

@@ -7,6 +7,6 @@ namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
 {
     public class MigrationDbContextWrapper : DbContextWrapper<MigrationDbContext>, IMigrationDbContext
     {
-        public MigrationDbContextWrapper(MigrationDbContext context, CancellationTokenSource tokenSource, IDbQueryCache queryPool) : base(context, tokenSource, queryPool) { }
+        public MigrationDbContextWrapper(MigrationDbContext context, CancellationTokenSource tokenSource) : base(context, tokenSource, null) { }
     }
 }
