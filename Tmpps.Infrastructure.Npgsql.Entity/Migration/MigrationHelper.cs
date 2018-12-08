@@ -24,7 +24,6 @@ namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
         private IPathResolver pathResolver;
         private ILogger logger;
         private IMigrationConfig config;
-
         private IMigrationDbContext DbContext => this.dbContextLazy.Value;
 
         public MigrationHelper(
@@ -43,19 +42,19 @@ namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
             this.logger = logger;
         }
 
-        public async Task InitializeDatabaseAsync()
+        public async Task InitializeDatabaseAsync(string databaseName)
         {
             this.logger.LogInformation($"Start create database");
-            using(var connection = new NpgsqlConnection(this.config.AdminConnectionString))
+            using(var connection = new NpgsqlConnection(this.config.RootConnectionString))
             {
                 await connection.OpenAsync();
-                var exists = await this.ExistsMigrationDatabaseAsync(connection);
+                var exists = await this.ExistsMigrationDatabaseAsync(connection, databaseName);
                 if (exists)
                 {
                     this.logger.LogInformation("Skip create database");
                     return;
                 }
-                this.CreateMigrationDatabaseAsync(connection);
+                this.CreateMigrationDatabaseAsync(connection, databaseName);
                 connection.Close();
             }
             this.logger.LogInformation("End create database");
@@ -129,16 +128,16 @@ namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
             return await this.DbContext.QuerySingleOrDefaultAsync<int>(query) > 0;
         }
 
-        private async Task<bool> ExistsMigrationDatabaseAsync(IDbConnection connection)
+        private async Task<bool> ExistsMigrationDatabaseAsync(IDbConnection connection, string databaseName)
         {
-            return await connection.QuerySingleOrDefaultAsync<int>("select count(*) from pg_database where datname = @database_name", new { database_name = this.config.Database }) > 0;
+            return await connection.QuerySingleOrDefaultAsync<int>("select count(*) from pg_database where datname = @database_name", new { database_name = databaseName }) > 0;
         }
 
-        private void CreateMigrationDatabaseAsync(IDbConnection connection)
+        private void CreateMigrationDatabaseAsync(IDbConnection connection, string databaseName)
         {
             using(var cmd = connection.CreateCommand())
             {
-                cmd.CommandText = $"create database {this.config.Database}";
+                cmd.CommandText = $"create database {databaseName}";
                 cmd.ExecuteNonQuery();
             }
         }
