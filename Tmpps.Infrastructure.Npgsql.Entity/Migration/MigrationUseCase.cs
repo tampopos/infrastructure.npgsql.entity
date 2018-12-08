@@ -35,7 +35,7 @@ namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
             {
                 throw new BizLogicException($"指定のディレクトリーは存在しません。(path:{this.config.Path})");
             }
-            var databases = Directory.GetDirectories(dir).Select(Path.GetDirectoryName).Where(x => string.IsNullOrEmpty(this.config.Database) || this.config.Database == x);
+            var databases = Directory.GetDirectories(dir).Select(Path.GetFileName).Where(x => string.IsNullOrEmpty(this.config.Database) || this.config.Database == x);
             foreach (var database in databases)
             {
                 var files = Directory.GetFiles(Path.Combine(dir, database), "*.sql", SearchOption.AllDirectories)
