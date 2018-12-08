@@ -30,7 +30,7 @@ namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
 
         public async Task<int> ExecuteAsync()
         {
-            var dir = this.pathResolver.ResolveDirectoryPath("this.config.Path");
+            var dir = this.pathResolver.ResolveDirectoryPath(this.config.Path);
             var databases = Directory.GetDirectories(dir).Where(x => string.IsNullOrEmpty(this.config.Database) || this.config.Database == Path.GetDirectoryName(x));
             foreach (var database in databases)
             {
