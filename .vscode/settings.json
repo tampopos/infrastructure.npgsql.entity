@@ -37,6 +37,7 @@
     "Xunit",
     "appsettings",
     "boardless",
+    "circleci",
     "classname",
     "gitignore",
     "hoge",

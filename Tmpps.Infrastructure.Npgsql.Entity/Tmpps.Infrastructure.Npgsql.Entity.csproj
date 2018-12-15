@@ -3,15 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Tmpps.Infrastructure.Npgsql.Entity</PackageId>
-    <Version>2.0.7</Version>
     <Authors>tampopos</Authors>
     <Company>tampopos</Company>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1.1" />
-    <PackageReference Include="Tmpps.Infrastructure.Data" Version="2.0.3" />
+    <PackageReference Include="Tmpps.Infrastructure.Data" Version="2.0.4" />
   </ItemGroup>
 
 </Project>
