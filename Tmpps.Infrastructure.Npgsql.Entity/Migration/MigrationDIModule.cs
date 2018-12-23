@@ -14,7 +14,6 @@ namespace Tmpps.Infrastructure.Npgsql.Entity.Migration
             builder.RegisterType<MigrationDbContextWrapper>(x => x.As<IMigrationDbContext>());
             builder.RegisterType<MigrationRepository>(x => x.As<IMigrationRepository<MigrationHistory>>());
             builder.RegisterType<MigrationHelper>(x => x.As<IMigrationHelper>());
-            builder.RegisterType<MigrationUseCase>(x => x.As<IMigrationUseCase>());
             builder.RegisterType<DbQueryCache>(x => x.As<IDbQueryCache>());
         }
     }
