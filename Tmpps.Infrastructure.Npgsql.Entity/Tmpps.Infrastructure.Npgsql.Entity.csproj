@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.1.1.1" />
-    <PackageReference Include="Tmpps.Infrastructure.Data" Version="2.0.4" />
+    <PackageReference Include="Tmpps.Infrastructure.Data" Version="3.0.0" />
   </ItemGroup>
 
 </Project>
